@@ -20,7 +20,7 @@ public class UserService {
         if (!validateUserIDRegistered(request.getUserId()))
             saveUserEntity(
                     User.builder()
-                            .userId(request.getUserId())
+                            .id(request.getUserId())
                             .nickname(request.getNickname())
                             .password(request.getPassword())
                             .build());
@@ -40,8 +40,8 @@ public class UserService {
         User user = getUserEntity(userId);
         if (request.getUserId() != null)
             if (!validateUserIDRegistered(request.getUserId())
-                    || request.getUserId().equals(user.getUserId()))
-                user.setUserId(request.getUserId());
+                    || request.getUserId().equals(user.getId()))
+                user.setId(request.getUserId());
             else throw new MiniException(ALREADY_REGISTERED);
         if (request.getNickname() != null)
             user.setNickname(request.getNickname());
@@ -53,7 +53,7 @@ public class UserService {
     public String login(UserDto.Login loginUser) {
         User user = getUserEntity(loginUser.getUserId());
         if (loginUser.getPassword().equals(user.getPassword()))
-            return user.getUserId();
+            return user.getId();
         else throw new MiniException(WRONG_PASSWORD);
     }
 

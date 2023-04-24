@@ -35,7 +35,7 @@ public class UserDto {
 
         public static Response fromEntity(User user) {
             return Response.builder()
-                    .userId(user.getUserId())
+                    .userId(user.getId())
                     .nickname(user.getNickname())
                     .build();
         }

@@ -17,11 +17,8 @@ import javax.persistence.*;
 @Table(name = "members")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "uuid", length = 20)
-    private Long uuid;
-    @Column(name = "user_id", length = 30, nullable = false, unique = true)
-    private String userId;
+    @Column(name = "id", length = 30, nullable = false)
+    private String id;
     @Column(name = "nickname", length = 30, nullable = false)
     private String nickname;
     @Column(name = "password", length = 50, nullable = false)
