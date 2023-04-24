@@ -29,7 +29,7 @@ public class UserService {
 
     @Transactional
     public void deleteUser(String userId) {
-        userRepository.deleteByUserId(userId);
+        userRepository.deleteById(userId);
     }
 
     public UserDto.Response getUser(String userId) {
@@ -59,7 +59,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     private boolean validateUserIDRegistered(@NonNull String userId) {
-        return userRepository.existsByUserId(userId);
+        return userRepository.existsById(userId);
     }
 
     @Transactional
@@ -69,7 +69,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     private User getUserEntity(String userId) {
-        return userRepository.findByUserId(userId)
+        return userRepository.findById(userId)
                 .orElseThrow(() -> new MiniException(NO_USER));
     }
 }
