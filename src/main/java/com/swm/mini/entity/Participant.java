@@ -1,19 +1,18 @@
 package com.swm.mini.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import java.util.Date;
-import java.util.List;
 
-@NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "participant")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Entity
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = "participant")
 public class Participant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

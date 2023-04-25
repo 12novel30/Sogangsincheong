@@ -1,12 +1,10 @@
 package com.swm.mini.entity;
 
 import lombok.*;
-import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
-@DynamicInsert
 @Getter
 @Setter
 @Builder
