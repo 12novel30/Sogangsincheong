@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
-    public UserDto.Response getUser(@PathVariable final String userId) {
+    public UserDto.Response getUserInfo(@PathVariable final String userId) {
         return userService.getUser(userId);
     }
 
