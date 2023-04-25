@@ -27,6 +27,9 @@ public class Event implements Serializable {
     @Column(name = "category")
     private String category;
 
+    @Column(name = "participant_limit")
+    private int limit;
+
     @Column(name = "start_date")
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
