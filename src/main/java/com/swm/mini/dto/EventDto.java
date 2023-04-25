@@ -1,13 +1,11 @@
 package com.swm.mini.dto;
 
 import com.swm.mini.entity.Event;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 public class EventDto {
     @Getter
@@ -60,11 +58,31 @@ public class EventDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class Login {
+    public static class Detail {
         @NotNull
-        private String userId;
+        private String title;
+
         @NotNull
-        private String password;
+        private String category;
+        @NotNull
+        private int limit;
+        @NotNull
+        private Date startDate;
+        @NotNull
+        private Date endDate;
+        private int nowParticipant;
+        @Setter
+        private List<ParticipantDto.Response> partiList;
+
+        public static Detail fromEntity(Event event) {
+            return Detail.builder()
+                    .title(event.getTitle())
+                    .category(event.getCategory())
+                    .limit(event.getLimit())
+                    .startDate(event.getStartDate())
+                    .endDate(event.getEndDate())
+                    .build();
+        }
     }
 }
 

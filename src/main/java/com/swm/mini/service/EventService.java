@@ -45,7 +45,7 @@ public class EventService {
     @Transactional
     public void validateEventLimitThenCreateParticipant(
             ParticipantDto.Request request) {
-        if (eventRepository.countById(request.getEventId())
+        if (getEventEntity(request.getEventId()).getLimit()
                 > participantRepository.countByEvent_Id(request.getEventId()) + 1)
             validateAlreadyJoinedThenCreateParticipant(request);
         else throw new MiniException(LIMIT_OVER);
@@ -67,6 +67,17 @@ public class EventService {
                             getEventEntity(p.getEvent().getId())));
         }
         return myEventList;
+    }
+
+    @Transactional(readOnly = true)
+    public EventDto.Detail getEventsDetail(Long eventId) {
+        EventDto.Detail detail = EventDto.Detail.fromEntity(getEventEntity(eventId));
+        detail.setPartiList(
+                participantRepository.findByEvent_Id(eventId)
+                        .stream()
+                        .map(ParticipantDto.Response::fromEntity)
+                        .collect(Collectors.toList()));
+        return detail;
     }
 
     private User getUserEntity(String userId) {
@@ -92,5 +103,4 @@ public class EventService {
         return eventRepository.findById(eventId)
                 .orElseThrow(() -> new MiniException(NO_EVENT));
     }
-
 }

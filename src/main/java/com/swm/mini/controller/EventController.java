@@ -29,8 +29,7 @@ public class EventController {
     }
 
     @PostMapping("/events/join")
-    public void joinEvent(@Valid @RequestBody ParticipantDto.Request request,
-                          @PathVariable final String userId) {
+    public void joinEvent(@Valid @RequestBody ParticipantDto.Request request) {
         eventService.validateEventLimitThenCreateParticipant(request);
     }
 
@@ -54,5 +53,11 @@ public class EventController {
     }
 
     // 이벤트 업데이트 필요함
+
+    @GetMapping("/events/detail/{eventId}")
+    public EventDto.Detail getEventsDetail(@PathVariable final Long eventId) {
+        return eventService.getEventsDetail(eventId);
+    }
+
 
 }

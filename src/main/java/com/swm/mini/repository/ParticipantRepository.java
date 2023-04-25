@@ -10,6 +10,8 @@ public interface ParticipantRepository extends JpaRepository<Participant, Long> 
 
     boolean existsByUser_IdAndEvent_Id(String id, long id1);
 
+    List<Participant> findByEvent_Id(long id);
+
     List<Participant> findByUser_Id(String id);
 
 }
