@@ -46,7 +46,7 @@ public class EventService {
     public void validateEventLimitThenCreateParticipant(
             ParticipantDto.Request request) {
         if (getEventEntity(request.getEventId()).getLimit()
-                > participantRepository.countByEvent_Id(request.getEventId()) + 1)
+                >= participantRepository.countByEvent_Id(request.getEventId()) + 1)
             validateAlreadyJoinedThenCreateParticipant(request);
         else throw new MiniException(LIMIT_OVER);
     }
