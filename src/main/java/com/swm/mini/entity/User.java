@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "members")
+@Table(name = "users")
 public class User {
     @Id
     @Column(name = "user_id", length = 30, nullable = false)
