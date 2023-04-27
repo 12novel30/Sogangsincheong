@@ -53,8 +53,15 @@ public class EventService {
 
     @Transactional(readOnly = true)
     public List<EventDto.Response> getAllEvents() {
-        return eventRepository.findAll()
-                .stream().map(EventDto.Response::fromEntity).collect(Collectors.toList());
+        List<EventDto.Response> list = eventRepository.findAll()
+                .stream()
+                .map(EventDto.Response::fromEntity)
+                .collect(Collectors.toList());
+        for (EventDto.Response e : list) {
+            e.setNowParticipant(
+                    (int) participantRepository.countByEvent_Id(e.getId()));
+        }
+        return list;
     }
 
     @Transactional(readOnly = true)
@@ -62,9 +69,11 @@ public class EventService {
         List<Participant> partiList = participantRepository.findByUser_Id(userId);
         List<EventDto.Response> myEventList = new ArrayList<>();
         for (Participant p : partiList) {
-            myEventList.add(
-                    EventDto.Response.fromEntity(
-                            getEventEntity(p.getEvent().getId())));
+            EventDto.Response response = EventDto.Response.fromEntity(
+                    getEventEntity(p.getEvent().getId()));
+            response.setNowParticipant(
+                    (int) participantRepository.countByEvent_Id(p.getEvent().getId()));
+            myEventList.add(response);
         }
         return myEventList;
     }

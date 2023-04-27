@@ -32,7 +32,8 @@ public class EventDto {
     public static class Response {
         @NotNull
         private String title;
-
+        @NotNull
+        private long id;
         @NotNull
         private String category;
         @NotNull
@@ -41,10 +42,12 @@ public class EventDto {
         private Date startDate;
         @NotNull
         private Date endDate;
+        @Setter
         private int nowParticipant;
 
         public static Response fromEntity(Event event) {
             return Response.builder()
+                    .id(event.getId())
                     .title(event.getTitle())
                     .category(event.getCategory())
                     .limit(event.getLimit())
