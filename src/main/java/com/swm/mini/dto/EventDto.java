@@ -70,6 +70,7 @@ public class EventDto {
         private Date startDate;
         @NotNull
         private Date endDate;
+        @Setter
         private int nowParticipant;
         @Setter
         private List<ParticipantDto.Response> partiList;

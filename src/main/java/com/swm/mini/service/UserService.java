@@ -3,7 +3,7 @@ package com.swm.mini.service;
 import com.swm.mini.dto.UserDto;
 import com.swm.mini.entity.User;
 import com.swm.mini.exception.MiniException;
-import com.swm.mini.repository.UserRepository;
+import com.swm.mini.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import static com.swm.mini.exception.MiniErrorCode.*;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private final UserRepository userRepository;
+    private final UsersRepository userRepository;
 
     public void createUser(@NonNull UserDto.Request request) {
         if (!validateUserIDRegistered(request.getUserId()))

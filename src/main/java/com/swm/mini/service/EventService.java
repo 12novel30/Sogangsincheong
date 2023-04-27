@@ -8,7 +8,7 @@ import com.swm.mini.entity.User;
 import com.swm.mini.exception.MiniException;
 import com.swm.mini.repository.EventRepository;
 import com.swm.mini.repository.ParticipantRepository;
-import com.swm.mini.repository.UserRepository;
+import com.swm.mini.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +24,7 @@ import static com.swm.mini.exception.MiniErrorCode.*;
 public class EventService {
     private final EventRepository eventRepository;
     private final ParticipantRepository participantRepository;
-    private final UserRepository userRepository;
+    private final UsersRepository userRepository;
 
     @Transactional
     public void createEvent(EventDto.Request request, String userId) {
@@ -77,6 +77,7 @@ public class EventService {
                         .stream()
                         .map(ParticipantDto.Response::fromEntity)
                         .collect(Collectors.toList()));
+        detail.setNowParticipant(detail.getPartiList().size());
         return detail;
     }
 
